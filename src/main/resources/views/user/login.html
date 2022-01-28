@@ -11,8 +11,14 @@
     <h1>로그인</h1>
     <div>
         <form th:action="@{/user/login}" method="post" th:object="${userEntity}">
-            <div><input type="text" th:field="*{uid}" placeholder="user id"></div>
-            <div><input type="password" th:field="*{upw}" placeholder="user password"></div>
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" th:field="*{uid}" placeholder="user id" >
+                <label for="uid">아이디</label>
+            </div>
+            <div>
+                <input type="text" th:field="*{upw}" placeholder="user password" value="aaaaa">
+                <label for="upw">비밀번호</label>
+            </div>
             <div><input type="submit" value="Login"></div>
         </form>
     </div>

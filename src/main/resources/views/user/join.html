@@ -1,0 +1,50 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="temp/thymeleaf_layout">
+<head>
+    <title>회원가입</title>
+    <link rel="stylesheet" th:href="@{/css/user/}">
+    <script defer th:src="@{/js/user/}"></script>
+</head>
+
+<th:block layout:fragment="content">
+    <h1>회원가입</h1>
+    <div>
+        <form th:action="@{/user/join}" method="post" th:object="${userEntity}">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" th:field="*{uid}" placeholder="user id" >
+                <label for="uid">아이디</label>
+            </div>
+            <div>
+                <input type="password" th:field="*{upw}" class="form-control" placeholder="user password">
+                <label for="upw">비밀번호</label>
+            </div>
+            <div>
+                <input type="text" class="form-control" placeholder="Confirm User password" id="confirm_upw">
+                <label for="confirm_upw">비밀번호 확인</label>
+            </div>
+            <div>
+                <input type="text" th:field="*{nm}" placeholder="user Name">
+                <label for="nm">이름</label>
+            </div>
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">성별</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender_1" value="2" checked>
+                        <label class="form-check-label" for="gender_1">
+                            여자
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gender" id="gender_2" value="1">
+                        <label class="form-check-label" for="gender_2">
+                            남자
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+            <div><input type="submit" value="Join"></div>
+        </form>
+    </div>
+</th:block>
