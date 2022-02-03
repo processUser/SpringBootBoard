@@ -13,7 +13,8 @@
         LEFT JOIN t_user B
         ON B.iuser = A.iuser
         WHERE A.isdel = 0 AND A.icategory = #{icategory}
-        ORDER BY A.iboard DESC;
+        ORDER BY A.iboard DESC
+        LIMIT ${startIdx}, ${recordCount}
     </select>
 
     <select id="selBoard" resultType="BoardVo">
@@ -22,6 +23,13 @@
         LEFT JOIN t_user B
         ON B.iuser = A.iuser
         WHERE A.isdel = 0 AND A.iboard = #{iboard}
-        ORDER BY A.iboard DESC;
+        ORDER BY A.iboard DESC
+    </select>
+
+    <select id="selMaxPageVal" resultType="ResultVo">
+        SELECT CEIL(COUNT(iboard) / ${recordCount}) AS result
+        FROM t_board
+        where isdel = 0
+        and icategory = #{icategory}
     </select>
 </mapper>

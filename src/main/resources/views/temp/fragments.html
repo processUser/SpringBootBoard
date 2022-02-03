@@ -19,7 +19,7 @@
                             </div>
                             <li th:if="${session.loginUser != null}"><a href="/user/logout" class="text-white">Logout</a></li>
 
-                            <li th:each="item : ${@menus}"><a th:href="@{/user/list(icategory=${item.icategory})}" class="text-white" th:text="${item.nm}"></a></li>
+                            <li th:each="item : ${@menus}"><a th:href="@{/board/list(icategory=${item.icategory})}" class="text-white" th:text="${item.nm}"></a></li>
 
                         </ul>
                     </div>
