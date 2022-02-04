@@ -4,6 +4,7 @@
     let currentPage = 1; // 현재 페이지
     let maxPage = 1;
     const recordCount = 5; // 레코드 수
+    const pagingCount = 5; //페이징의 페이징 수
 
     const boardListElem = document.querySelector('#board_list');
     const dataElem = document.querySelector('#data');
@@ -36,16 +37,51 @@
     const makePaging = () => {
 //        const ulElem = document.querySelector('#page_container nav ul')
         const ulElem = pageContainerElem.querySelector('nav > ul')
-        for(let i = 1; i <= maxPage; i++){
+        ulElem.innerHTML = null;
+
+        const calcPage = parseInt((currentPage - 1) / pagingCount);
+        const startPage = (calcPage * pagingCount) + 1;
+        const lastPage = (calcPage + 1) * pagingCount;
+
+        if(startPage > 1) {
+            const liElem = document.createElement('li');
+            ulElem.appendChild(liElem);
+
+            liElem.className = 'page-item page-link pointer';
+            liElem.innerHTML = '&lt;';
+            liElem.addEventListener('click', e => {
+                currentPage = startPage - 1;
+                getList();
+                makePaging();
+            })
+        }
+
+
+        for(let i=startPage; i<=(lastPage > maxPage ? maxPage : lastPage); i++) {
             let liElem = document.createElement('li');
             liElem.className = 'page-item page-link pointer';
             liElem.innerText = i;
             ulElem.append(liElem);
 
             liElem.addEventListener('click', e => {
-                currentPage = i;
-                getList();
+                if(currentPage != i) {
+                    currentPage = i;
+                    getList();
+                }
             })
+        }
+
+        if(maxPage > lastPage) {
+            const liElem = document.createElement('li');
+            ulElem.appendChild(liElem);
+
+            liElem.className = 'page-item page-link pointer';
+            liElem.innerHTML = '&gt;';
+            liElem.addEventListener('click', e => {
+                currentPage = lastPage + 1;
+                getList();
+                makePaging();
+            });
         }
     }
 
@@ -66,6 +102,10 @@
                 <td>${item.hits}</td>
                 <td>${item.rdt}</td>
             `;
+
+            trElem.addEventListener('click', () => {
+                location.href=`/board/detail?iboard=${item.iboard}`;
+            })
         })
 
     }

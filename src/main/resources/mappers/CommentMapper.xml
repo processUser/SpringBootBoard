@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.springbootboard.board.comment.CommentMapper">
+    <insert id="insCmt">
+        insert into t_board_cmt(iboard, iuser, ctnt)
+        values(#{iboard}, #{iuser}, #{ctnt})
+    </insert>
+
+    <select id="selCommentList" resultType="BoardCommentVo">
+        SELECT A.icmt, A.iboard, A.iuser, A.ctnt, A.rdt, A.mdt, B.nm AS writernm
+        FROM t_board_cmt A
+                 LEFT JOIN t_user B
+                           ON B.iuser = A.iuser
+        WHERE A.iboard = #{iboard}
+        ORDER BY icmt ASC;
+    </select>
+</mapper>
