@@ -22,6 +22,8 @@ public class UserController {
         userEntity.setUpw("aaaaa");
     }
 
+    /*
+    //spring security 를 이용
     @PostMapping("/login")
     public String loginProc(UserEntity entity){
         int result = service.login(entity);
@@ -29,14 +31,16 @@ public class UserController {
         return "redirect:/";
     }
 
+
     @GetMapping("/logout")
     public String logout(HttpSession hs) {
         hs.invalidate();
         return "redirect:/";
     }
+    */
 
     @GetMapping("/join")
-    public void join(@ModelAttribute UserEntity userEntity) {
+    public void join(@ModelAttribute("userEntity") UserEntity userEntity) {
     }
 
     @PostMapping("/join")

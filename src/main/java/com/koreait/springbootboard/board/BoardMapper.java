@@ -10,6 +10,7 @@ import java.util.List;
 
 @Mapper
 public interface BoardMapper {
+    int insBoard(BoardEntity entity);
     List<BoardVo> selBoardList(BoardDto dto);
     BoardVo selBoard(BoardDto dto);
     ResultVo selMaxPageVal(BoardDto dto);

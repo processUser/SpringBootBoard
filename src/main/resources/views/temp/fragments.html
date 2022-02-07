@@ -1,5 +1,5 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
     <th:block th:fragment="header">
         <div class="collapse bg-dark" id="navbar_header">
@@ -13,11 +13,22 @@
                         <h4 class="text-white">Menus</h4>
                         <ul class="list-unstyled">
 
-                            <div th:if="${session.loginUser == null}">
-                                <li><a href="/user/login" class="text-white">Login</a></li>
-                                <li><a href="/user/join" class="text-white">Join</a></li>
-                            </div>
-                            <li th:if="${session.loginUser != null}"><a href="/user/logout" class="text-white">Logout</a></li>
+                            <!-- //
+                            <span th:if="${session.loginUser == null}">
+                                <li><a th:href="@{/user/login}" class="text-white">Login</a></li>
+                                <li><a th:href="@{/user/join}" class="text-white">Join</a></li>
+                            </span>
+                            <span th:if="${session.loginUser != null}">
+                                <li><a th:href="@{/user/logout}" class="text-white">Logout</a></li>
+                            </span>
+                            // -->
+                            <span sec:authorize="isAuthenticated()">
+                                <li><a th:href="@{/user/logout}" class="text-white">Logout</a></li>
+                            </span>
+                            <span sec:authorize="isAnonymous()">
+                                <li><a th:href="@{/user/login}" class="text-white">Login</a></li>
+                                <li><a th:href="@{/user/join}" class="text-white">Join</a></li>
+                            </span>
 
                             <li th:each="item : ${@menus}"><a th:href="@{/board/list(icategory=${item.icategory})}" class="text-white" th:text="${item.nm}"></a></li>
 

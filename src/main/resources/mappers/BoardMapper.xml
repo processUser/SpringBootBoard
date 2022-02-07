@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.springbootboard.board.BoardMapper">
-
+    <insert id="insBoard">
+        INSERT INTO t_board
+            ( icategory, iuser, title, ctnt )
+        VALUES
+            ( ${icategory}, ${iuser}, #{title}, #{ctnt} )
+    </insert>
     <select id="selBoardList" resultType="BoardVo">
         <!--
             삭제 되지 않았고, 지정한 카테고리 글, 최신글이 가장 위에
